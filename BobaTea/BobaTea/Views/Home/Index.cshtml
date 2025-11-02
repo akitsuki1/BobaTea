@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Trang chủ";
+}
+
+<link rel="stylesheet" href="~/Content/css/MasterLayout.css" />
+
+
+<div class="welcome-banner">
+    <div class="welcome-content">
+        <h1>Chào mừng đến với Silver Wolf</h1>
+        <p>Khám phá thế giới của những hương vị độc đáo!</p>
+        <a href="@Url.Action("Produce", "Home")" class="btn-primary">Xem Menu Ngay</a>
+    </div>
+    <img src="@Url.Content("~/Content/images/8469233.jpg")" alt="Welcome Banner" class="welcome-bg" />
+</div>
+
+<div class="intro-section">
+    <h2>A(mong)bout Us</h2>
+    <p>
+        Silver Wolf không chỉ là một quán tà lưa, mà là nơi bạn tìm thấy nguồn cảm hứng.
+        Chúng tôi tự hào mang đến những sản phẩm chất lượng nhất (chắc thế 😄)
+    </p>
+
+    <div class="features">
+        <div class="feature-item">
+            <img src="@Url.Content("~/Content/images/cafe.jpg")" alt="Sản phẩm nổi bật 1" />
+            <h3>Bést seller</h3>
+            <p>Không ngol vẫn tính tiền :(</p>
+        </div>
+
+        <div class="feature-item">
+            <img src="@Url.Content("~/Content/images/pink.jpg")" alt="Không gian" />
+            <h3>Không Gian Sáng Tạo</h3>
+            <p>Life's short, make it sweet</p>
+        </div>
+    </div>
+</div>

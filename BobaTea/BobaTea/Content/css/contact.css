@@ -1,0 +1,86 @@
+﻿body {
+    font-family: 'Pacifico', cursive, sans-serif;
+    background: linear-gradient(135deg, #fbc2eb, #a6c0fe);
+    min-height: 100vh;
+    padding: 40px;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #6a11cb;
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+    input:focus, textarea:focus {
+        border-color: #6a11cb;
+    }
+
+button {
+    display: block;
+    margin: 25px auto 10px;
+    padding: 12px 25px;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+    button:hover {
+        transform: scale(1.05);
+        background: linear-gradient(90deg, #2575fc, #6a11cb);
+    }
+
+/* Dòng thông báo */
+#responseMessage {
+    text-align: center;
+    font-size: 18px;
+    color: #28a745;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+    #responseMessage:not(.hidden) {
+        opacity: 1;
+    }
+
+.hidden {
+    display: none;
+}

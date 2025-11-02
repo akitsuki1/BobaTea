@@ -1,0 +1,255 @@
+﻿/* Import phông chữ (nếu bạn dùng Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.pacifico-regular {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Kiểu dáng chung */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    font-family: 'Pacifico', cursive, sans-serif;
+}
+
+/* wrapper chứa header, main, footer */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* phần nội dung chính phải chiếm khoảng trống còn lại */
+.main-content, main {
+    flex: 1 1 auto !important;
+    margin-top: 0 !important; /* đảm bảo không có khoảng thừa trên */
+    padding-bottom: 0; /* nếu thêm padding-bottom lớn sẽ đẩy footer xuống */
+    height: auto !important; /* loại bỏ height cố định như 800px */
+}
+/* Header & Menu */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #c5e9ff;
+    background: linear-gradient(90deg, #6c7ee1, #92b9e3, #ffc4a4);
+    box-shadow: 0 4px 12px rgba(7, 147, 241, 0.5);
+    border-radius: 5px;
+}
+
+.main-content {
+    flex: 1; /* chiếm toàn bộ chiều cao còn lại */
+    width: 100%;
+    border: none;
+    margin-top: 20px; /* khoảng cách nếu header là fixed */
+    height: 800px;
+}
+
+.menu {
+    display: flex;
+    gap: 50px;
+    margin: 0 50px;
+}
+
+    .menu a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 18px;
+    }
+
+        .menu a:hover {
+            color: #007BFF;
+        }
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+    .logo img {
+        height: 60px;
+        width: auto;
+        border-radius: 10px;
+        margin-left: 20px;
+    }
+
+.brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Thanh tìm kiếm */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+    .search-btn img {
+        width: 25px;
+        height: 25px;
+    }
+
+
+.search-input {
+    position: absolute;
+    right: 40px; /* nằm bên trái*/
+    width: 0;
+    opacity: 0;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    transition: all 0.4s ease;
+}
+
+    .search-input.active {
+        width: 200px;
+        opacity: 1;
+        background-color: #fff;
+    }
+
+/* Tiêu đề chung của mục */
+.menu-title {
+    text-align: center;
+    font-size: 40px;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+/* Banner chào mừng */
+.welcome-banner {
+    position: relative;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    color: white;
+}
+
+.welcome-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: brightness(0.6); /*làm tối*/
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+    .welcome-content h1 {
+        font-size: 50px;
+        margin: 0;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .welcome-content p {
+        font-size: 20px;
+        margin: 10px 0 20px 0;
+    }
+
+/* Nút bấm chung */
+.btn-primary {
+    background-color: #6c7ee1;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #5a69c4;
+    }
+
+/* Phần giới thiệu & Tính năng */
+.intro-section {
+    padding: 40px 100px;
+    text-align: center;
+    background-color: #fff;
+}
+
+    .intro-section h2 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .intro-section p {
+        font-size: 18px;
+        color: #555;
+        max-width: 800px;
+        margin: 0 auto 30px auto;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.feature-item {
+    flex-basis: 300px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    overflow: hidden; /* bo góc cho ảnh */
+}
+
+    .feature-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .feature-item h3 {
+        font-size: 22px;
+        color: #333;
+        margin: 15px 0 10px 0;
+    }
+
+    .feature-item p {
+        font-size: 16px;
+        padding: 0 20px 20px 20px;
+        margin-bottom: 0;
+        font-family: 'Pacifico', cursive, sans-serif;
+    }

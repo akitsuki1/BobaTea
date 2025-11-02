@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Giỏ Hàng";
+}
+
+<link rel="stylesheet" href="~/Content/css/cart.css" />
+
+<div class="cart-container">
+    <h2>Giỏ hàng của bạn</h2>
+
+    <div class="cart-items">
+        <div class="cart-item">
+            <img src=@Url.Content("~/Content/images/pink.jpg") alt="pink" />
+        </div>
+        <div>
+            <h3>Trà sữa truyền thống</h3>
+            <p>Số lượng: 1</p>
+            <p>Giá: 45.000đ</p>
+        </div>
+    </div>
+
+    <div class="cart-items">
+        <div class="cart-item">
+            <img src=@Url.Content("~/Content/images/green.jpg") alt="Trà sữa matcha" />
+        </div>
+        <div>
+            <h3>Trà sữa matcha</h3>
+            <p>Số lượng: 2</p>
+            <p>Giá: 90.000đ</p>
+        </div>
+    </div>
+
+    <button class="checkout-btn">Thanh toán</button>
+</div>
+

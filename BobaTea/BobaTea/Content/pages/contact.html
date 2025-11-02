@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Liên hệ hỗ trợ | Silver Wolf Milk Tea</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/contact.css">
+</head>
+<body>
+    <h1>Liên hệ hỗ trợ</h1>
+    <p>
+        Nếu bạn có thắc mắc hoặc phản hồi, vui lòng điền thông tin vào form dưới đây.
+        Đội ngũ Silver Wolf sẽ liên hệ lại trong thời gian sớm nhất!
+    </p>
+
+    <form id="contactForm">
+        <label for="name">Họ và tên:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email liên hệ:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Nội dung:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Gửi phản hồi</button>
+
+        <!-- Thông báo sẽ hiển thị ở đây -->
+        <p id="responseMessage" class="hidden">🎉 Yêu cầu của bạn sẽ sớm được giải quyết!</p>
+    </form>
+
+    <script>
+        const form = document.getElementById("contactForm");
+        const responseMessage = document.getElementById("responseMessage");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Ngăn trang load lại
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!name || !email || !message) {
+                alert("⚠️ Vui lòng điền đầy đủ thông tin!");
+                return;
+            }
+
+            // Giả lập gửi dữ liệu thành công
+            setTimeout(() => {
+                responseMessage.classList.remove("hidden"); // Hiện dòng thông báo
+                form.reset(); // Xóa nội dung form
+            }, 500);
+        });
+    </script>
+</body>
+</html>

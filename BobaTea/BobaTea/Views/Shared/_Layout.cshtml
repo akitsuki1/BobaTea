@@ -1,0 +1,66 @@
+﻿@{
+    Layout = null;
+    var title = ViewBag.Title ?? "Silver Wolf";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>@title - Silver Wolf</title>
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="~/Content/css/masterlayout.css" />
+    <link rel="stylesheet" href="~/Content/css/footer.css" />
+
+    <!-- Font Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="@Url.Content("~/Content/images/logo.jpg")" alt="logo" />
+                <span class="brand">Silver Wolf</span>
+            </div>
+
+            <nav class="menu">
+                <a href="@Url.Action("Index", "Home")">Trang chủ</a>
+                <a href="@Url.Action("Produce", "Home")">Sản phẩm</a>
+                <a href="@Url.Action("Information", "Home")">Tin tức</a>
+                <a href="@Url.Action("Apply", "Home")">Tuyển dụng</a>
+                <a href="@Url.Action("Cart", "Home")">Giỏ hàng</a>
+
+                @if (Session["User"] != null)
+                {
+                    <span>Xin chào, @Session["User"]!</span>
+                    <a href="@Url.Action("Logout", "Account")">Đăng xuất</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")">Đăng nhập</a>
+                }
+            </nav>
+
+
+            <div class="search-container">
+                <button class="search-btn">
+                    <img src="@Url.Content("~/Content/images/search.png")" alt="Tìm kiếm" />
+                </button>
+                <input type="text" class="search-input" placeholder="Tìm kiếm sản phẩm..." />
+            </div>
+        </header>
+
+        <!-- Nội dung trang -->
+        <main class="main-content">
+            @RenderBody()
+        </main>
+
+        <!-- Footer -->
+        @Html.Partial("_Footer")
+    </div>
+</body>
+</html>

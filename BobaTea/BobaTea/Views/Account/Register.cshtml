@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null; /* Không dùng layout để hiển thị riêng biệt */
+    ViewBag.Title = "Đăng ký";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <title>@ViewBag.Title - Silver Wolf</title>
+    <link rel="stylesheet" href="~/Content/css/Login.css" /> <!-- Dùng lại CSS login -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Đăng ký</h2>
+            <form method="post" action="/Account/Register">
+                <div class="input-box">
+                    <input type="text" name="Username" required />
+                    <label>Tên đăng nhập</label>
+                    <div class="input-line"></div>
+                    <i class="icon fas fa-user"></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="email" name="Email" required />
+                    <label>Email</label>
+                    <div class="input-line"></div>
+                    <i class="icon fas fa-envelope"></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" name="Password" required />
+                    <label>Mật khẩu</label>
+                    <div class="input-line"></div>
+                    <i class="icon fas fa-lock"></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" name="ConfirmPassword" required />
+                    <label>Nhập lại mật khẩu</label>
+                    <div class="input-line"></div>
+                    <i class="icon fas fa-lock"></i>
+                </div>
+
+                <button type="submit">Đăng ký</button>
+
+                <div class="register-link">
+                    <p>Đã có tài khoản? <a href="/Account/Login">Đăng nhập ngay</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿@model List<BobaTea.Models.CartItem>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<link rel="stylesheet" href="~/Content/css/cart.css" />
+
+<div class="cart-container">
+    <h2>🛍️ Giỏ hàng của bạn</h2>
+
+    @if (!Model.Any())
+    {
+        <p>Giỏ hàng của bạn đang trống.</p>
+        <a href="/Home/Produce" class="checkout-btn">Mua sắm ngay</a>
+    }
+    else
+    {
+        decimal total = 0;
+
+        foreach (var item in Model)
+        {
+            var itemTotal = item.Price * item.Quantity;
+            total += itemTotal;
+
+            <div class="cart-items">
+                <div class="cart-item">
+                    <img src="@Url.Content(item.ImageUrl)" alt="@item.ProductName" />
+                </div>
+                <div>
+                    <h3>@item.ProductName</h3>
+                    <p>Số lượng: @item.Quantity</p>
+                    <p>Giá: @string.Format("{0:N0} đ", item.Price)</p>
+                    <p><strong>Thành tiền:</strong> @string.Format("{0:N0} đ", itemTotal)</p>
+                </div>
+            </div>
+        }
+
+        <hr />
+        <div class="cart-summary">
+            <h3>Tổng cộng: <span>@string.Format("{0:N0} đ", total)</span></h3>
+            <div class="cart-buttons">
+                <button class="checkout-btn" id="checkoutBtn">Thanh toán</button>
+                <a href="/Cart/Clear" class="checkout-btn remove">Xóa giỏ hàng</a>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Popup thanh toán -->
+<div id="checkoutModal" class="modal">
+    <div class="modal-content">
+        <h2>🎉 Thanh toán thành công!</h2>
+        <p>Cảm ơn bạn đã mua hàng 💖</p>
+        <button id="closeModal">Đóng</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    // Hiển thị popup thanh toán
+    document.getElementById("checkoutBtn")?.addEventListener("click", () => {
+        document.getElementById("checkoutModal").style.display = "flex";
+    });
+
+    // Đóng popup
+    document.getElementById("closeModal")?.addEventListener("click", () => {
+        document.getElementById("checkoutModal").style.display = "none";
+        window.location.href = "/Home/Produce"; // quay lại trang sản phẩm
+    });
+    </script>
+}

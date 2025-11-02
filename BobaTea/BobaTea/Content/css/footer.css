@@ -1,0 +1,96 @@
+﻿/* Cấu trúc giữ footer ở đáy */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.footer {
+    background-color: #222;
+    color: #f1f1f1;
+    padding: 40px 0 20px;
+    text-align: left;
+    font-family: "Segoe UI", sans-serif;
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin: 10px;
+}
+
+    .footer-section h3 {
+        color: #ffcc33;
+        font-family: 'Pacifico', cursive;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+    }
+
+    .footer-section p, .footer-section li, .footer-section a {
+        color: #ddd;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .footer-section a {
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+        .footer-section a:hover {
+            color: #ffcc33;
+        }
+
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+.social-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+    .social-links img {
+        width: 28px;
+        height: 28px;
+        filter: brightness(0) invert(1);
+        transition: transform 0.3s, filter 0.3s;
+    }
+
+        .social-links img:hover {
+            transform: scale(1.1);
+            filter: brightness(0.8) invert(0.9);
+        }
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #444;
+    margin-top: 20px;
+    padding-top: 10px;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+/* Đảm bảo footer luôn dính đáy */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main, .main-content {
+    flex: 1;
+}

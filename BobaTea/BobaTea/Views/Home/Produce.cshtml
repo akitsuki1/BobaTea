@@ -1,0 +1,127 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Menu ";
+}
+
+<link rel="stylesheet" href="~/Content/css/produce.css" />
+<div class="center">
+    <div class="product" data-name="Cà phê" data-price="35000" data-img="~/Content/images/cafe.jpg">
+        <img src="@Url.Content("~/Content/images/cafe.jpg")" alt="cafe" />
+        <h3>Cà phê</h3>
+        <div class="number-product">
+            <label>Số lượng:</label>
+            <input type="number" class="qty" value="1" min="1" />
+            <button class="add">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <div class="product product2" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
+        <img src="@Url.Content("~/Content/images/purple.jpg")" alt="Trà sữa khoai môn" />
+        <h3>Trà sữa khoai môn</h3>
+        <div class="number-product">
+            <label for="num-purple">Số lượng:</label>
+            <input type="number" class="qty" value="1" min="1">
+            <button class="add">Thêm vào giỏ</button>
+        </div>
+        <a href="@Url.Content("~/Content/images/purple.jpg")"></a>
+    </div>
+
+    <div class="product product3" data-name="Trà sữa Dâu" data-price="35000" data-img="~/Content/images/pink.jpg">
+        <img src="@Url.Content("~/Content/images/pink.jpg")" alt="Trà sữa dâu ta" />
+        <h3>Trà sữa dâu ta</h3>
+        <div class="number-product">
+            <label for="num-pink">Số lượng:</label>
+            <input type="number" class="qty" value="1" min="1">
+            <button class="add">Thêm vào giỏ</button>
+        </div>
+        <a href="@Url.Content("~/Content/images/pink.jpg")"></a>
+    </div>
+
+    <div class="product product4" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
+        <img src="@Url.Content("~/Content/images/green.jpg")" alt="mattamatme" />
+        <h3>mattamatme</h3>
+        <div class="number-product">
+            <label for="num-green">Số lượng:</label>
+            <input type="number" class="qty" value="1" min="1">
+            <button class="add">Thêm vào giỏ</button>
+        </div>
+        <a href="@Url.Content("~/Content/images/green.jpg")"></a>
+    </div>
+
+    <div class="product product5" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
+        <img src="@Url.Content("~/Content/images/bơ.jpg")" alt="Trà sữa Bơ" />
+        <h3>Trà sữa Bơ</h3>
+        <div class="number-product">
+            <label for="num-bo">Số lượng:</label>
+            <input type="number" class="qty" value="1" min="1">
+            <button class="add">Thêm vào giỏ</button>
+        </div>
+        <a href="@Url.Content("~/Content/images/bơ.jpg")"></a>
+    </div>
+
+    <div class="product product6" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
+        <img src="@Url.Content("~/Content/images/đào.jpg")" alt="Trà sữa đào" />
+        <h3>Trà sữa đào</h3>
+        <div class="number-product">
+            <label for="num-dao">Số lượng:</label>
+            <input type="number" class="qty" value="1" min="1">
+            <button class="add">Thêm vào giỏ</button>
+        </div>
+        <a href="@Url.Content("~/Content/images/đào.jpg")"></a>
+    </div>
+
+    <div class="product product7" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
+        <img src="@Url.Content("~/Content/images/socola.jpg")" alt="Trà sữa Socola" />
+        <h3>Trà sữa Socola</h3>
+        <div class="number-product">
+            <label for="num-socola">Số lượng:</label>
+            <input type="number" class="qty" value="1" min="1">
+            <button class="add">Thêm vào giỏ</button>
+        </div>
+        <a href="@Url.Content("~/Content/images/socola.jpg")"></a>
+    </div>
+
+    <div class="product product8" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
+        <img src="@Url.Content("~/Content/images/việt quất.jpg")" alt="Trà sữa Việt Quất" />
+        <h3>Trà sữa Việt Quất</h3>
+        <div class="number-product">
+            <label for="num-blueberry">Số lượng:</label>
+            <input type="number" class="qty" value="1" min="1">
+            <button class="add">Thêm vào giỏ</button>
+        </div>
+        <a href="@Url.Content("~/Content/images/việt quất.jpg")"></a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(".add").click(function () {
+        const product = $(this).closest(".product");
+        const name = product.data("name");
+        const price = product.data("price");
+        const image = product.data("img");
+        const qty = parseInt(product.find(".qty").val());
+        /*Asynchronous JavaScript And XML */
+        $.ajax({
+            url: "/Cart/AddToCart",
+            type: "POST",
+            data: {
+                productName: name,
+                imageUrl: image,
+                quantity: qty,
+                price: price
+            },
+            success: function (res) {
+                if (res.success) {
+                    alert("✅ Đã thêm " + name + " vào giỏ hàng!");
+                } else {
+                    alert("❌ Có lỗi xảy ra khi thêm vào giỏ!");
+                }
+            },
+            error: function (xhr) {
+                alert("⚠️ Lỗi khi gửi yêu cầu tới server!");
+                console.error(xhr);
+            }
+        });
+    });
+</script>
