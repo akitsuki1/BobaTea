@@ -253,3 +253,19 @@ body {
         margin-bottom: 0;
         font-family: 'Pacifico', cursive, sans-serif;
     }
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    font-size: 14px;
+}
+
+    .user-menu a {
+        text-decoration: none;
+        color: #333;
+    }
+
+        .user-menu a:hover {
+            color: #007bff;
+        }

@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Bảng điều khiển";
+}
+
+<!-- Link CSS riêng cho Dashboard -->
+<link rel="stylesheet" href="~/Content/css/admin-dashboard.css" />
+
+<div class="dashboard-container">
+    <h1 class="text-center mb-4">📊 Bảng điều khiển quản trị</h1>
+
+    <div class="dashboard-cards">
+        <div class="card">
+            <h2>👥 Quản lý người dùng</h2>
+            <p>Xem, sửa hoặc xóa tài khoản khách hàng.</p>
+            <a href="@Url.Action("Index", "User", new { area = "Admin" })" class="btn btn-primary">Đi đến quản lý người dùng</a>
+        </div>
+        <div class="card">
+            <h2>🛍️ Quản lý sản phẩm</h2>
+            <p>Thêm, chỉnh sửa hoặc xóa sản phẩm trong cửa hàng.</p>
+            <a href="@Url.Action("Index", "Products", new { area = "Admin" })" class="btn btn-success">Đi đến quản lý sản phẩm</a>
+        </div>
+        <div class="card">
+            <h2>📦 Thông tin đơn hàng</h2>
+            <p>Xem danh sách đơn hàng, chi tiết và trạng thái giao hàng.</p>
+            <a href="@Url.Action("Index", "Orders", new { area = "Admin" })" class="btn btn-warning">Đi đến quản lý đơn hàng</a>
+        </div>
+
+    </div>
+</div>

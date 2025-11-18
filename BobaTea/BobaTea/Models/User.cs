@@ -1,17 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace BobaTea.Models
 {
-    public class User : Controller
+    public class User
     {
+        [Key]
+        public int UserId { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string Username { get; set; }
-        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100)]
         public string Password { get; set; }
 
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [StringLength(100)]
+        public string FullName { get; set; }
+
+        [Phone]
+        public string Phone { get; set; }
+
+        [StringLength(255)]
+        public string Address { get; set; }
+
+        public string AvatarUrl { get; set; }
+
+        [StringLength(20)]
+        public string Role { get; set; } = "User";
     }
 }

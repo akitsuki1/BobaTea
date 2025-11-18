@@ -1,35 +1,87 @@
-﻿@{
+﻿@model List<BobaTea.Models.CartItem>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Giỏ Hàng";
+    ViewBag.Title = "Giỏ hàng";
 }
 
 <link rel="stylesheet" href="~/Content/css/cart.css" />
 
-<div class="cart-container">
-    <h2>Giỏ hàng của bạn</h2>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🛍️ Giỏ hàng của bạn</h2>
 
-    <div class="cart-items">
-        <div class="cart-item">
-            <img src=@Url.Content("~/Content/images/pink.jpg") alt="pink" />
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning text-center">
+            Giỏ hàng của bạn đang trống. <a href="@Url.Action("Produce", "Home")" class="alert-link">Tiếp tục mua hàng</a>
         </div>
-        <div>
-            <h3>Trà sữa truyền thống</h3>
-            <p>Số lượng: 1</p>
-            <p>Giá: 45.000đ</p>
-        </div>
-    </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Ảnh</th>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var imgSrc = string.IsNullOrEmpty(item.ImageUrl)
+                            ? Url.Content("~/Content/images/no-image.png")
+                            : Url.Content(item.ImageUrl);
 
-    <div class="cart-items">
-        <div class="cart-item">
-            <img src=@Url.Content("~/Content/images/green.jpg") alt="Trà sữa matcha" />
+                        <tr>
+                            <td><img src="@imgSrc" class="cart-img" /></td>
+                            <td>@item.ProductName</td>
+                            <td>@item.Price.ToString("N0") đ</td>
+                            <td>@item.Quantity</td>
+                            <td>@((item.Price * item.Quantity).ToString("N0")) đ</td>
+                            <td>
+                                @item.ProductName <br />
+                                <small class="text-muted">
+                                    @if (!string.IsNullOrEmpty(item.Topping))
+                                    {@($"Topping: {item.Topping} | ")}
+                                    @($"Đường: {item.Sugar} | Đá: {item.Ice}")
+                                </small>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("RemoveFromCart", "Home", new { id = item.ProductId })" class="btn btn-danger btn-sm">
+                                    ❌ Xóa
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-        <div>
-            <h3>Trà sữa matcha</h3>
-            <p>Số lượng: 2</p>
-            <p>Giá: 90.000đ</p>
-        </div>
-    </div>
 
-    <button class="checkout-btn">Thanh toán</button>
+        <div class="text-end mt-3">
+            <h4>
+                Tổng cộng:
+                <span class="text-danger fw-bold">
+                    @Model.Sum(x => x.Price * x.Quantity).ToString("N0") đ
+                </span>
+            </h4>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <a href="@Url.Action("Produce", "Home")" class="btn btn-outline-primary">
+                ← Tiếp tục mua hàng
+            </a>
+            <a href="@Url.Action("Clear", "Cart")" class="btn btn-outline-danger">
+                🧹 Xóa toàn bộ giỏ
+            </a>
+            <a href="@Url.Action("Checkout", "Cart")" class="btn btn-success">
+                💳 Thanh toán
+            </a>
+        </div>
+
+    }
 </div>
-

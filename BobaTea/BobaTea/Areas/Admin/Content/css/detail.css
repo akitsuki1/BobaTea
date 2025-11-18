@@ -1,0 +1,68 @@
+﻿/* User Detail Page (Admin) */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+.detail-container {
+    width: 70%;
+    margin: 40px auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+    .detail-row strong {
+        color: #555;
+        width: 30%;
+    }
+
+    .detail-row span {
+        width: 65%;
+        color: #222;
+    }
+
+.action-buttons {
+    text-align: center;
+    margin-top: 25px;
+}
+
+    .action-buttons a {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 6px;
+        margin: 0 8px;
+        text-decoration: none;
+        color: #fff;
+    }
+
+.btn-edit {
+    background-color: #f39c12;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+}
+
+.btn-back {
+    background-color: #7f8c8d;
+}
+
+.action-buttons a:hover {
+    opacity: 0.9;
+}

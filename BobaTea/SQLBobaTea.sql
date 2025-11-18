@@ -1,0 +1,27 @@
+﻿CREATE TABLE Users (
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(100) NOT NULL,
+    PasswordHash NVARCHAR(200) NOT NULL,
+    Role NVARCHAR(20) DEFAULT 'Customer',
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+CREATE TABLE Products (
+    ProductId INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Description NVARCHAR(500) NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    ImageUrl NVARCHAR(200) NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+CREATE TABLE Orders (
+    OrderId INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT NOT NULL FOREIGN KEY REFERENCES Users(UserId),
+    ProductId INT NOT NULL FOREIGN KEY REFERENCES Products(ProductId),
+    Quantity INT DEFAULT 1,
+    Price DECIMAL(18,2) NOT NULL,
+    Total AS (Price*Quantity) PERSISTED,
+    OrderDate DATETIME DEFAULT GETDATE(),
+    Status NVARCHAR(20) DEFAULT 'Pending'
+);
+

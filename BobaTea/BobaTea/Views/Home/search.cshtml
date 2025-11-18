@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BobaTea.Models.Products>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Kết quả tìm kiếm";
+}
+
+<h2>Kết quả tìm kiếm: "@ViewBag.Keyword"</h2>
+
+@if (!Model.Any())
+{
+    <p>Không tìm thấy sản phẩm nào.</p>
+}
+else
+{
+    <div class="product-list">
+        @foreach (var item in Model)
+        {
+            var imgSrc = string.IsNullOrEmpty(item.ImageUrl)
+                ? Url.Content("~/Content/images/no-image.png")
+                : Url.Content(item.ImageUrl);
+
+            <div class="product-item">
+                <img src="@imgSrc" alt="@item.Name" />
+                <h3>@item.Name</h3>
+                <p>Giá: @item.Price.ToString("N0") VNĐ</p>
+                <a href="@Url.Action("Details", "Produce", new { id = item.ProductId })">
+                    Xem chi tiết
+                </a>
+            </div>
+        }
+    </div>
+}

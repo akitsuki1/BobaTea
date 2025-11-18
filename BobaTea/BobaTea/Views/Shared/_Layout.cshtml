@@ -12,7 +12,7 @@
     <!-- CSS chung -->
     <link rel="stylesheet" href="~/Content/css/masterlayout.css" />
     <link rel="stylesheet" href="~/Content/css/footer.css" />
-
+    <link rel="stylesheet" href="~/Content/css/search.css"/>
     <!-- Font Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,9 +34,10 @@
                 <a href="@Url.Action("Apply", "Home")">Tuyển dụng</a>
                 <a href="@Url.Action("Cart", "Home")">Giỏ hàng</a>
 
-                @if (Session["User"] != null)
+                @if (Session["Username"] != null)
                 {
-                    <span>Xin chào, @Session["User"]!</span>
+                    <span>Xin chào, @Session["Username"]!</span>
+                    <a href="@Url.Action("Profile", "Account")">Trang cá nhân</a>
                     <a href="@Url.Action("Logout", "Account")">Đăng xuất</a>
                 }
                 else
@@ -45,15 +46,27 @@
                 }
             </nav>
 
-
-            <div class="search-container">
-                <button class="search-btn">
-                    <img src="@Url.Content("~/Content/images/search.png")" alt="Tìm kiếm" />
-                </button>
-                <input type="text" class="search-input" placeholder="Tìm kiếm sản phẩm..." />
+            <div class="search-icon">
+                <img src="~/Content/images/search.png" alt="search" />
             </div>
-        </header>
 
+            <div id="searchOverlay" class="overlay" onclick="closeSearchPopup()"></div>
+
+            <div id="searchPopup" class="search-popup" onclick="event.stopPropagation()">
+                <form action="/Produce/Search" method="get" class="search-form">
+                    <input id="searchInput" type="text" name="keyword" class="popup-input"
+                           placeholder="Tìm kiếm sản phẩm..." autofocus />
+                    <button type="submit" class="popup-search-btn">
+                        <img src="~/Content/images/search.png" alt="Tìm kiếm" />
+                    </button>
+                </form>
+
+                <ul id="suggestList" class="suggest-list"></ul>
+            </div>
+
+            <script src="~/Content/js/search.js"></script>
+
+        </header>
         <!-- Nội dung trang -->
         <main class="main-content">
             @RenderBody()

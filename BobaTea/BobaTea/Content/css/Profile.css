@@ -1,0 +1,72 @@
+﻿.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 80vh;
+    padding-top: 40px;
+    background: #f8f9fa;
+}
+
+.profile-box {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 480px;
+}
+
+    .profile-box h2 {
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+    }
+
+.form-control, .form-control-plaintext {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.btn {
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 600;
+}
+
+.btn-success {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+}
+
+    .btn-success:hover {
+        background-color: #43a047;
+    }
+
+.btn-secondary {
+    background-color: #9e9e9e;
+    color: #fff;
+    text-decoration: none;
+}
+
+    .btn-secondary:hover {
+        background-color: #757575;
+    }
+
+.alert {
+    margin-bottom: 20px;
+    border-radius: 6px;
+    padding: 10px 15px;
+}

@@ -1,0 +1,36 @@
+﻿body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f8fa;
+    margin: 0;
+}
+
+.admin-wrapper {
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+    background-color: #212529;
+    color: white;
+}
+
+    .sidebar h4 {
+        font-weight: 600;
+    }
+
+    .sidebar .nav-link {
+        color: #ccc;
+        transition: 0.2s;
+    }
+
+        .sidebar .nav-link:hover {
+            color: #fff;
+            background-color: #343a40;
+            border-radius: 8px;
+        }
+
+.main-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}

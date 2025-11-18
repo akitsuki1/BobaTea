@@ -14,11 +14,19 @@ namespace BobaTea.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitForm(string name, string email, string message)
+        public JsonResult SubmitForm(string name, string email, string phone, string position, string message)
         {
-            // Xử lý logic lưu form hoặc gửi email tại đây
-            ViewBag.Success = "Cảm ơn bạn đã gửi thông tin!";
-            return View("Index");
+            try
+            {
+                // TODO: xử lý lưu dữ liệu, upload file nếu cần
+
+                return Json(new { success = true, msg = "✅ Đăng kí thành công! Cảm ơn bạn đã gửi thông tin." });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false, msg = "❌ Có lỗi xảy ra khi đăng kí!" });
+            }
         }
+
     }
 }

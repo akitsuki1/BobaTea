@@ -2,111 +2,126 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Tuyển Dụng";
 }
-<!-- GIỮ NGUYÊN NỘI DUNG HTML GỐC -->
 
-<link rel="stylesheet" href="~/Content/css/Apply.css"/>
+<link rel="stylesheet" href="~/Content/css/Apply.css" />
 
 <div class="apply">
     <div class="apply-banner">
-        <img src=@Url.Content("~/Content/images/tuyendung.jpg") alt="tuyendung" />
+        <img src="@Url.Content("~/Content/images/tuyendung.jpg")" alt="tuyendung" />
     </div>
+
     <div class="content apply1">
-        <img src=@Url.Content("~/Content/images/apply_content.jpg") alt="img apply" />
+        <img src="@Url.Content("~/Content/images/apply_content.jpg")" alt="img apply" />
         <div class="text-apply">
             <h1>YẾU TỐ TRỞ THÀNH NHÂN VIÊN QUÁN</h1>
             <p>Có kỹ năng giao tiếp ở mức khá – tốt.</p>
             <p>Có kinh nghiệm trong ngành dịch vụ, khách sạn – nhà hàng là ưu thế.</p>
             <p>Khả năng giao tiếp ngoại ngữ là tiếng Anh ở mức cơ bản.</p>
             <p>Làm việc siêng năng, đi làm đúng giờ và đều đặn.</p>
-            <p>Có sức khỏe tốt và có thể làm việc trong mô trường áp lực.</p>
+            <p>Có sức khỏe tốt và có thể làm việc trong môi trường áp lực.</p>
         </div>
     </div>
+
     <div class="content apply2">
         <div class="form-apply">
-            <h2> ĐĂNG KÍ ỨNG TUYỂN </h2>
-            <form action="https://httpbin.org/anything" method="post">
+            <h2>ĐĂNG KÍ ỨNG TUYỂN</h2>
+
+            <!-- Thông báo sẽ hiển thị ở đây -->
+            <div id="apply-message" style="display:none;" class="alert alert-success"></div>
+
+            <form id="applyForm" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="name"> họ và tên:</label>
-                    <input type="text" id="name" name="name" placeholder="Nhập họ và tên" required>
+                    <label for="name">Họ và tên:</label>
+                    <input type="text" id="name" name="name" placeholder="Nhập họ và tên" required />
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="nhập email" required>
+                    <input type="email" id="email" name="email" placeholder="Nhập email" required />
                 </div>
                 <div class="form-group">
-                    <label for="phone"> số điện thoại:</label>
-                    <input type="tel" id="phone" name="phone" placeholder="nhập số điện thoại" required>
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required />
                 </div>
                 <div class="form-group">
-                    <label for="position"> vị trí ứng tuyển:</label>
+                    <label for="position">Vị trí ứng tuyển:</label>
                     <select id="position" name="position" required>
                         <option value="">---Chọn vị trí---</option>
                         <option value="barista">Barista</option>
                         <option value="phucvu">Phục vụ</option>
                         <option value="quanly">Quản lý</option>
-                        <option value="thungan">thu ngân</option>
+                        <option value="thungan">Thu ngân</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="message"> giới thiệu bản thân:</label>
-                    <textarea id="message" name="message" rows="4" placeholder="giới thiệu về bản thân:"></textarea>
+                    <label for="message">Giới thiệu bản thân:</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Giới thiệu về bản thân"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="cv">Tải lên CV (PDF hoặc DOCX):</label>
-                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
+                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" />
                 </div>
-                <button type="submit" class="btn-apply">gửi đăng kí</button>
+                <button type="submit" class="btn-apply">Gửi đăng kí</button>
             </form>
         </div>
     </div>
 
-    <script>
-    document.querySelector("form").addEventListener("submit", function(event) {
-        event.preventDefault(); 
-
-        alert("✅ Chúng tôi sẽ sớm phản hồi đơn xin việc của bạn.");
-    });
-    </script>
-
     <div class="content apply3">
-        <div class="benefit-section">
-            <h2>LỢI ÍCH KHI LÀM VIỆC Ở QUÁN</h2>
-            <div class="benefit-list">
-                <div class="benefit-item">
-                    <h3>Trải nghiệm môi trường làm việc trẻ trung</h3>
-                    <p>
-                        Làm việc tại Gong cha đồng nghĩa với việc bạn được “sống” và làm việc trong môi trường của những bạn trẻ năng động, vui tươi.
-                        Còn điều gì tuyệt vời hơn khi được làm việc và kết bạn với những đồng nghiệp cùng sở thích về pha chế để thoải mái chia sẻ từ công việc đến cuộc sống.
-                    </p>
-                </div>
-
-                <div class="benefit-item">
-                    <h3>Làm việc cho thương hiệu quốc tế</h3>
-                    <p>
-                        Không chỉ được làm việc trong môi trường trẻ trung và thân thiện,
-                        làm việc tại Gong cha đồng nghĩa với việc bạn sẽ trải nghiệm nghề pha chế tại một thương hiệu uy tín có mặt trên 20 quốc gia với hơn 1.000 cửa hàng trên thế giới.
-                    </p>
-                </div>
-
-                <div class="benefit-item">
-                    <h3>Trải nghiệm uống trà sữa</h3>
-                    <p>
-                        Trở thành nhân viên chính thức của Gong cha,
-                        bạn có cơ hội được nhận thức uống miễn phí hàng tháng từ công ty.
-                        Còn gì hấp dẫn hơn khi bạn có cơ hội tư tay pha chế cho mình ly trà sữa thơm ngon và thưởng thức nó!
-                    </p>
-                </div>
-
-                <div class="benefit-item">
-                    <h3> được đào tạo chuyên nghiệp</h3>
-                    <p>
-                        Bạn sẽ được đào tạo các kĩ năng pha chế, và làm quen với nhiều công thức pha chế và yêu cầu cho từng sản phẩm.
-                        Sau quá trình đào tạo, nếu bạn vượt qua bài kiểm tra về tác phong khi làm việc cũng như các tiêu chuẩn về cách thức pha chế,
-                        các quy định về vệ sinh bạn sẽ có cơ hội trở thành nhân viên chính thức của Gong Cha.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <!-- Giữ nguyên phần lợi ích -->
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+        $("#applyForm").on("submit", function (e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: "/Apply/SubmitForm",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    if (res.success) {
+                        $("#apply-message")
+                            .removeClass("alert-danger")
+                            .addClass("alert-success")
+                            .text(res.msg)
+                            .fadeIn();
+
+                        $("#applyForm")[0].reset();
+
+                        // Sau 3 giây thì tự động fadeOut
+                        setTimeout(function () {
+                            $("#apply-message").fadeOut();
+                        }, 3000);
+                    } else {
+                        $("#apply-message")
+                            .removeClass("alert-success")
+                            .addClass("alert-danger")
+                            .text(res.msg)
+                            .fadeIn();
+
+                        setTimeout(function () {
+                            $("#apply-message").fadeOut();
+                        }, 3000);
+                    }
+                },
+                error: function () {
+                    $("#apply-message")
+                        .removeClass("alert-success")
+                        .addClass("alert-danger")
+                        .text("⚠️ Lỗi khi gửi yêu cầu tới server!")
+                        .fadeIn();
+
+                    setTimeout(function () {
+                        $("#apply-message").fadeOut();
+                    }, 3000);
+                }
+            });
+        });
+    });
+</script>

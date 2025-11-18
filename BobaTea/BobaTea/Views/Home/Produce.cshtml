@@ -1,127 +1,162 @@
-﻿@{
+﻿@model IEnumerable<BobaTea.Models.Products>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Menu ";
+    ViewBag.Title = "Menu";
 }
 
 <link rel="stylesheet" href="~/Content/css/produce.css" />
-<div class="center">
-    <div class="product" data-name="Cà phê" data-price="35000" data-img="~/Content/images/cafe.jpg">
-        <img src="@Url.Content("~/Content/images/cafe.jpg")" alt="cafe" />
-        <h3>Cà phê</h3>
-        <div class="number-product">
-            <label>Số lượng:</label>
-            <input type="number" class="qty" value="1" min="1" />
-            <button class="add">Thêm vào giỏ</button>
-        </div>
-    </div>
 
-    <div class="product product2" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
-        <img src="@Url.Content("~/Content/images/purple.jpg")" alt="Trà sữa khoai môn" />
-        <h3>Trà sữa khoai môn</h3>
-        <div class="number-product">
-            <label for="num-purple">Số lượng:</label>
-            <input type="number" class="qty" value="1" min="1">
-            <button class="add">Thêm vào giỏ</button>
-        </div>
-        <a href="@Url.Content("~/Content/images/purple.jpg")"></a>
-    </div>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">🍹 Sản phẩm của chúng tôi</h2>
 
-    <div class="product product3" data-name="Trà sữa Dâu" data-price="35000" data-img="~/Content/images/pink.jpg">
-        <img src="@Url.Content("~/Content/images/pink.jpg")" alt="Trà sữa dâu ta" />
-        <h3>Trà sữa dâu ta</h3>
-        <div class="number-product">
-            <label for="num-pink">Số lượng:</label>
-            <input type="number" class="qty" value="1" min="1">
-            <button class="add">Thêm vào giỏ</button>
-        </div>
-        <a href="@Url.Content("~/Content/images/pink.jpg")"></a>
-    </div>
+    <div class="product-list">
+        @foreach (var p in Model)
+        {
+            var imgSrc = string.IsNullOrEmpty(p.ImageUrl)
+                ? Url.Content("~/Content/images/no-image.png")
+                : Url.Content(p.ImageUrl);
 
-    <div class="product product4" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
-        <img src="@Url.Content("~/Content/images/green.jpg")" alt="mattamatme" />
-        <h3>mattamatme</h3>
-        <div class="number-product">
-            <label for="num-green">Số lượng:</label>
-            <input type="number" class="qty" value="1" min="1">
-            <button class="add">Thêm vào giỏ</button>
-        </div>
-        <a href="@Url.Content("~/Content/images/green.jpg")"></a>
-    </div>
+            <div class="product-item"
+                 data-name="@p.Name"
+                 data-price="@p.Price"
+                 data-img="@imgSrc">
+                <img src="@imgSrc" alt="@p.Name" class="product-img" />
+                <h4 class="product-name">@p.Name</h4>
+                <p class="product-price">@p.Price.ToString("N0") đ</p>
+                <p class="product-desc">@p.Description</p>
 
-    <div class="product product5" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
-        <img src="@Url.Content("~/Content/images/bơ.jpg")" alt="Trà sữa Bơ" />
-        <h3>Trà sữa Bơ</h3>
-        <div class="number-product">
-            <label for="num-bo">Số lượng:</label>
-            <input type="number" class="qty" value="1" min="1">
-            <button class="add">Thêm vào giỏ</button>
-        </div>
-        <a href="@Url.Content("~/Content/images/bơ.jpg")"></a>
-    </div>
-
-    <div class="product product6" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
-        <img src="@Url.Content("~/Content/images/đào.jpg")" alt="Trà sữa đào" />
-        <h3>Trà sữa đào</h3>
-        <div class="number-product">
-            <label for="num-dao">Số lượng:</label>
-            <input type="number" class="qty" value="1" min="1">
-            <button class="add">Thêm vào giỏ</button>
-        </div>
-        <a href="@Url.Content("~/Content/images/đào.jpg")"></a>
-    </div>
-
-    <div class="product product7" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
-        <img src="@Url.Content("~/Content/images/socola.jpg")" alt="Trà sữa Socola" />
-        <h3>Trà sữa Socola</h3>
-        <div class="number-product">
-            <label for="num-socola">Số lượng:</label>
-            <input type="number" class="qty" value="1" min="1">
-            <button class="add">Thêm vào giỏ</button>
-        </div>
-        <a href="@Url.Content("~/Content/images/socola.jpg")"></a>
-    </div>
-
-    <div class="product product8" data-name="Trà sữa Khoai môn" data-price="35000" data-img="~/Content/images/purple.jpg">
-        <img src="@Url.Content("~/Content/images/việt quất.jpg")" alt="Trà sữa Việt Quất" />
-        <h3>Trà sữa Việt Quất</h3>
-        <div class="number-product">
-            <label for="num-blueberry">Số lượng:</label>
-            <input type="number" class="qty" value="1" min="1">
-            <button class="add">Thêm vào giỏ</button>
-        </div>
-        <a href="@Url.Content("~/Content/images/việt quất.jpg")"></a>
+                <div class="actions">
+                    <input type="number" class="qty" value="1" min="1" />
+                    <button class="add">🛒 Thêm vào giỏ</button>
+                </div>
+            </div>
+        }
     </div>
 </div>
 
+<!-- 🔹 Modal hiển thị chi tiết sản phẩm -->
+<div id="productDetailModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <h3 id="detail-name"></h3>
+        <img id="detail-img" src="" alt="" style="width:150px;height:150px;object-fit:cover;border-radius:8px;">
+        <p class="text-danger fw-bold" id="detail-price"></p>
+
+        <div class="option-group">
+            <label><strong>🧋 Chọn topping:</strong></label><br>
+            <select id="detail-topping" class="form-select">
+                <option value="">Không thêm</option>
+                <option value="Trân châu đen">Trân châu đen</option>
+                <option value="Thạch cà phê">Thạch cà phê</option>
+                <option value="Pudding trứng">Pudding trứng</option>
+                <option value="Xương sáo">Xương sáo</option>
+            </select>
+        </div>
+
+        <div class="option-group">
+            <label><strong>🍬 Lượng đường:</strong></label><br>
+            <select id="detail-sugar" class="form-select">
+                <option value="100%">100%</option>
+                <option value="75%">75%</option>
+                <option value="50%">50%</option>
+                <option value="25%">25%</option>
+            </select>
+        </div>
+
+        <div class="option-group">
+            <label><strong>🧊 Lượng đá:</strong></label><br>
+            <select id="detail-ice" class="form-select">
+                <option value="100%">100%</option>
+                <option value="75%">75%</option>
+                <option value="50%">50%</option>
+                <option value="25%">25%</option>
+                <option value="0%">0%</option>
+            </select>
+        </div>
+
+        <div class="option-group">
+            <label><strong>Số lượng:</strong></label><br>
+            <input type="number" id="detail-qty" min="1" value="1" class="form-control" style="width:80px;">
+        </div>
+
+        <div class="text-center mt-3">
+            <button id="btnAddToCart" class="btn btn-success">🛒 Thêm vào giỏ</button>
+            <button id="btnCloseDetail" class="btn btn-secondary">Đóng</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    $(".add").click(function () {
-        const product = $(this).closest(".product");
-        const name = product.data("name");
-        const price = product.data("price");
-        const image = product.data("img");
-        const qty = parseInt(product.find(".qty").val());
-        /*Asynchronous JavaScript And XML */
-        $.ajax({
-            url: "/Cart/AddToCart",
-            type: "POST",
-            data: {
-                productName: name,
-                imageUrl: image,
-                quantity: qty,
-                price: price
-            },
-            success: function (res) {
-                if (res.success) {
-                    alert("✅ Đã thêm " + name + " vào giỏ hàng!");
-                } else {
-                    alert("❌ Có lỗi xảy ra khi thêm vào giỏ!");
+    $(document).ready(function () {
+        function addToCart(data) {
+            $.ajax({
+                url: "/Home/AddToCart",
+                type: "POST",
+                data: data,
+                success: function (res) {
+                    if (res.success) {
+                        alert(`✅ Đã thêm "${data.productName}" vào giỏ hàng!`);
+                        $("#productDetailModal").fadeOut();
+                    } else {
+                        alert("❌ Có lỗi xảy ra khi thêm vào giỏ!");
+                    }
+                },
+                error: function () {
+                    alert("⚠️ Lỗi khi gửi yêu cầu tới server!");
                 }
-            },
-            error: function (xhr) {
-                alert("⚠️ Lỗi khi gửi yêu cầu tới server!");
-                console.error(xhr);
+            });
+        }
+        $(".add").on("click", function (e) {
+            e.stopPropagation(); //tránh xung đột//
+            const product = $(this).closest(".product-item");
+
+            const data = {
+                productName: product.data("name"),
+                imageUrl: product.data("img"),
+                quantity: parseInt(product.find(".qty").val()) || 1,
+                price: parseFloat(product.data("price"))
+            };
+
+            addToCart(data);
+        });
+        $(".product-item").on("click", function (e) {
+            // bỏ qua nếu click vào nút thêm
+            if ($(e.target).hasClass("add")) return;
+
+            const product = $(this);
+            const price = parseFloat(product.data("price"));
+
+            $("#detail-name").text(product.data("name"));
+            $("#detail-price").text(price.toLocaleString() + " đ");
+            $("#detail-img").attr("src", product.data("img"));
+            $("#detail-qty").val(1);
+
+            $("#productDetailModal").fadeIn();
+        });
+        $("#btnCloseDetail").on("click", function () {
+            $("#productDetailModal").fadeOut();
+        });
+
+        $(document).on("click", function (e) {
+            if ($(e.target).is("#productDetailModal")) {
+                $("#productDetailModal").fadeOut();
             }
+        });
+        $("#btnAddToCart").on("click", function () {
+            const data = {
+                productName: $("#detail-name").text(),
+                imageUrl: $("#detail-img").attr("src"),
+                quantity: parseInt($("#detail-qty").val()) || 1,
+                price: parseFloat($("#detail-price").text().replace(/\D/g, "")),
+                topping: $("#detail-topping").val() || [],
+                sugar: $("#detail-sugar").val(),
+                ice: $("#detail-ice").val()
+            };
+            addToCart(data);
         });
     });
 </script>

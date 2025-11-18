@@ -1,0 +1,21 @@
+use BobaTea
+go 
+ALTER TABLE Orders
+ADD CONSTRAINT FK_Orders_Users
+FOREIGN KEY (UserId) REFERENCES Users(UserId);
+
+ALTER TABLE Orders
+ADD CONSTRAINT FK_Orders_Products
+FOREIGN KEY (ProductId) REFERENCES Products(ProductId);
+
+ALTER TABLE OrderDetail
+ADD CONSTRAINT FK_OrderDetail_Product
+FOREIGN KEY (IDProduct) REFERENCES Product(ProductID);
+
+ALTER TABLE OrderDetail
+ADD CONSTRAINT FK_OrderDetail_OrderPro
+FOREIGN KEY (IDOrder) REFERENCES OrderPro(ID);
+
+ALTER TABLE OrderPro
+ADD CONSTRAINT FK_OrderPro_Customer
+FOREIGN KEY (IDCus) REFERENCES Customer(IDCus);

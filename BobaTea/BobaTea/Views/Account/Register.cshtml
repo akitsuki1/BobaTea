@@ -1,56 +1,53 @@
-﻿@{
-    Layout = null; /* Không dùng layout để hiển thị riêng biệt */
+﻿@model BobaTea.Models.Users
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Đăng ký";
 }
 
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8" />
-    <title>@ViewBag.Title - Silver Wolf</title>
-    <link rel="stylesheet" href="~/Content/css/Login.css" /> <!-- Dùng lại CSS login -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-</head>
-<body>
-    <div class="login-container">
-        <div class="login-box">
-            <h2>Đăng ký</h2>
-            <form method="post" action="/Account/Register">
-                <div class="input-box">
-                    <input type="text" name="Username" required />
-                    <label>Tên đăng nhập</label>
-                    <div class="input-line"></div>
-                    <i class="icon fas fa-user"></i>
-                </div>
+<link rel="stylesheet" href="~/Content/css/Profile.css" />
 
-                <div class="input-box">
-                    <input type="email" name="Email" required />
-                    <label>Email</label>
-                    <div class="input-line"></div>
-                    <i class="icon fas fa-envelope"></i>
-                </div>
+<div class="register-container">
+    <div class="register-box">
+        <h2 class="text-center">📝 Đăng ký tài khoản</h2>
 
-                <div class="input-box">
-                    <input type="password" name="Password" required />
-                    <label>Mật khẩu</label>
-                    <div class="input-line"></div>
-                    <i class="icon fas fa-lock"></i>
-                </div>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
 
-                <div class="input-box">
-                    <input type="password" name="ConfirmPassword" required />
-                    <label>Nhập lại mật khẩu</label>
-                    <div class="input-line"></div>
-                    <i class="icon fas fa-lock"></i>
-                </div>
+            <div class="form-group">
+                <label>Tên đăng nhập</label>
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", required = "required" })
+            </div>
 
-                <button type="submit">Đăng ký</button>
+            <div class="form-group">
+                <label>Email</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = "required" })
+            </div>
 
-                <div class="register-link">
-                    <p>Đã có tài khoản? <a href="/Account/Login">Đăng nhập ngay</a></p>
-                </div>
-            </form>
-        </div>
+            <div class="form-group">
+                <label>Mật khẩu</label>
+                @Html.PasswordFor(m => m.PasswordHash, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Nhập lại mật khẩu</label>
+                <input type="password" name="ConfirmPassword" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label>Số điện thoại</label>
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Địa chỉ</label>
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group text-center mt-3">
+                <button type="submit" class="btn btn-success">Đăng ký</button>
+                <a href="@Url.Action("Login", "Account")" class="btn btn-secondary">Đăng nhập</a>
+            </div>
+        }
     </div>
-</body>
-</html>
+</div>

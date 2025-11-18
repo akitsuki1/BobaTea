@@ -1,0 +1,96 @@
+﻿@model IEnumerable<BobaTea.Models.Products>
+@{
+    ViewBag.Title = "Quản lý sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link rel="stylesheet" href="~/Areas/Admin/Content/css/detail.css" />
+
+<h2>Danh sách sản phẩm</h2>
+
+<p>
+    @Html.ActionLink("➕ Thêm sản phẩm mới", "Create", null, new { @class = "btn btn-success mb-3" })
+</p>
+
+<table class="table table-bordered table-striped text-center align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Ảnh</th>
+            <th>Tên sản phẩm</th>
+            <th>Mô tả</th>
+            <th>Giá (VNĐ)</th>
+            <th>Ngày tạo</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            var imgSrc = string.IsNullOrEmpty(p.ImageUrl)
+                ? Url.Content("~/Content/images/no-image.png")
+                : Url.Content(p.ImageUrl);
+
+            <tr>
+                <td>
+                    <img src="@imgSrc" alt="@p.Name"
+                         style="width:80px;height:80px;object-fit:cover;border-radius:6px;" />
+                </td>
+                <td>@p.Name</td>
+                <td>@p.Description</td>
+                <td>@p.Price.ToString("N0") đ</td>
+                <td>@p.CreatedAt?.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @Html.ActionLink("🔍 Chi tiết", "Details", "Products",
+                        new { area = "Admin", id = p.ProductId },
+                        new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("✏️ Sửa", "Edit", "Products",
+                        new { area = "Admin", id = p.ProductId },
+                        new { @class = "btn btn-warning btn-sm" })
+                    @Html.ActionLink("🗑️ Xóa", "Delete", "Products",
+                        new { area = "Admin", id = p.ProductId },
+                        new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<!-- Bootstrap Modal xác nhận xóa -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc muốn xóa <strong id="productName"></strong> không?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post" action="">
+                    @Html.AntiForgeryToken()
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">🗑️ Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Khi mở modal, truyền dữ liệu sản phẩm vào
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const productId = button.getAttribute('data-id');
+            const productName = button.getAttribute('data-name');
+            const productNameSpan = deleteModal.querySelector('#productName');
+            const deleteForm = deleteModal.querySelector('#deleteForm');
+
+            productNameSpan.textContent = productName;
+            deleteForm.action = '/Admin/Products/Delete/' + productId; // gửi POST đến DeleteConfirmed
+        });
+    </script>
+}

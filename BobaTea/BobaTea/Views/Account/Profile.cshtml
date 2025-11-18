@@ -1,0 +1,45 @@
+﻿@model BobaTea.Models.Users
+@{
+    ViewBag.Title = "Thông tin cá nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/Profile.css"/>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">👤 Thông tin cá nhân</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success text-center">@TempData["Message"]</div>
+    }
+
+    @using (Html.BeginForm("Profile", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.UserId)
+
+        <div class="form-group">
+            <label>Tên đăng nhập</label>
+            <input type="text" value="@Model.Username" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Số điện thoại</label>
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Địa chỉ</label>
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3"> Lưu thay đổi</button>
+    }
+</div>
+

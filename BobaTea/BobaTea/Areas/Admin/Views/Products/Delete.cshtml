@@ -1,0 +1,44 @@
+﻿@model BobaTea.Models.Products
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; // hoặc bỏ dòng này nếu bạn không dùng layout
+}
+
+<h2 class="text-danger">⚠️ Xác nhận xóa sản phẩm</h2>
+
+<div class="alert alert-warning">
+    <strong>Bạn có chắc chắn muốn xóa sản phẩm này không?</strong>
+</div>
+
+<div class="card mb-3" style="max-width: 500px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@Url.Content(Model.ImageUrl ?? "~/Content/images/no-image.png")"
+                 alt="@Model.Name"
+                 class="img-fluid rounded-start" />
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text">
+                    <strong>Giá:</strong> @Model.Price.ToString("N0") đ <br />
+                    <strong>Mô tả:</strong> @Model.Description
+                </p>
+                <p class="card-text">
+                    <small class="text-muted">Ngày tạo: @Model.CreatedAt?.ToString("dd/MM/yyyy")</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Delete", "Products", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ProductId)
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger">🗑️ Xóa sản phẩm</button>
+        @Html.ActionLink("← Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary ml-2" })
+    </div>
+}

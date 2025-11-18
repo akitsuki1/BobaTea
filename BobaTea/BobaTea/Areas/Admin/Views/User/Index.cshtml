@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BobaTea.Models.Users>
+@{
+    ViewBag.Title = "Quản lý người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="text-center mb-3">👥 Quản lý tài khoản người dùng</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success text-center">@TempData["Message"]</div>
+}
+
+<link rel="stylesheet" href="~/Areas/Admin/Content/css/user.css"/>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Tên đăng nhập</th>
+            <th>Email</th>
+            <th>Điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Vai trò</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.UserId</td>
+                <td>@u.Username</td>
+                <td>@u.Email</td>
+                <td>@u.Phone</td>
+                <td>@u.Address</td>
+                <td>@u.Role</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = u.UserId })" class="btn btn-info btn-sm">Chi tiết</a>
+                    <a href="@Url.Action("Edit", new { id = u.UserId })" class="btn btn-warning btn-sm">Sửa</a>
+                    <button class="btn btn-danger btn-sm delete-btn" data-id="@u.UserId">Xóa</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(".delete-btn").click(function () {
+            if (confirm("Bạn có chắc muốn xóa người dùng này không?")) {
+                var id = $(this).data("id");
+                $.post("/Admin/User/Delete/" + id, function (res) {
+                    if (res.success) {
+                        alert("✅ Xóa thành công!");
+                        location.reload();
+                    } else {
+                        alert("❌ " + res.message);
+                    }
+                });
+            }
+        });
+    </script>
+}

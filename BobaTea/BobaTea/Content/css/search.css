@@ -1,0 +1,68 @@
+﻿.search-icon {
+    cursor: pointer;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+    .search-icon img {
+        width: 24px;
+        height: 24px;
+        filter: brightness(0) invert(1); 
+    }
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    z-index: 1000;
+}
+
+/* Popup tìm kiếm giữa màn hình */
+.search-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 12px;
+    display: none;
+    z-index: 1001;
+    width: 450px;
+    transition: 0.25s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+    .search-popup.show {
+        display: block;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.popup-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.popup-search-btn {
+    background: black;
+    border: none;
+    padding: 9px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+    .popup-search-btn img {
+        width: 22px;
+        filter: brightness(0) invert(1);
+    }

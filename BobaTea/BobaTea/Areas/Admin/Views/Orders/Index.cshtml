@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BobaTea.Models.OrderPro>
+
+<h2>Danh sách đơn hàng</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã đơn</th>
+            <th>Khách hàng</th>
+            <th>Ngày đặt</th>
+            <th>Địa chỉ giao</th>
+            <th>Chi tiết</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Model)
+        {
+            <tr>
+                <td>@o.ID</td>
+                <td>@o.Customer?.Name</td>
+                <td>@o.DateOrder?.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@o.AddressDeliverry</td>
+                <td>
+                    <a href="@Url.Action("Details", "Orders", new { id = o.ID, area = "Admin" })"
+                       class="btn btn-primary btn-sm">
+                        Xem
+                </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

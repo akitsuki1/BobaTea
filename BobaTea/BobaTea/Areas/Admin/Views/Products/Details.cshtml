@@ -1,0 +1,33 @@
+﻿@model BobaTea.Models.Products
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">Tên sản phẩm</dt>
+    <dd class="col-sm-9">@Model.Name</dd>
+
+    <dt class="col-sm-3">Mô tả</dt>
+    <dd class="col-sm-9">@Model.Description</dd>
+
+    <dt class="col-sm-3">Giá</dt>
+    <dd class="col-sm-9">@Model.Price.ToString("N0") đ</dd>
+
+    <dt class="col-sm-3">Ngày tạo</dt>
+    <dd class="col-sm-9">@Model.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</dd>
+
+    <dt class="col-sm-3">Ảnh</dt>
+    <dd class="col-sm-9">
+        <img src="@Url.Content(Model.ImageUrl)" alt="@Model.Name" style="max-width:200px;" />
+    </dd>
+</dl>
+
+<p>
+    @Html.ActionLink("⬅️ Quay lại danh sách", "Index", "Products", new { area = "Admin" }, new { @class = "btn btn-secondary" })
+    @Html.ActionLink("✏️ Sửa", "Edit", "Products", new { area = "Admin", id = Model.ProductId }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("🗑️ Xóa", "Delete", "Products", new { area = "Admin", id = Model.ProductId }, new { @class = "btn btn-danger" })
+</p>

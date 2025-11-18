@@ -1,0 +1,47 @@
+﻿@model List<BobaTea.Models.CartItem>
+
+@{
+    ViewBag.Title = "Hóa đơn thanh toán";
+}
+
+<h2 class="text-center mb-4">🧾 Hóa đơn thanh toán</h2>
+
+<table class="table table-bordered text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Topping</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Tổng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Topping</td>
+                <td>@item.Price.ToString("N0") đ</td>
+                <td>@item.Quantity</td>
+                <td>@((item.Price * item.Quantity).ToString("N0")) đ</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-end">
+    <h4>
+        Tổng cộng:
+        <span class="text-danger fw-bold">
+            @Model.Sum(x => x.Price * x.Quantity).ToString("N0") đ
+        </span>
+    </h4>
+</div>
+
+<form method="post" action="@Url.Action("PaymentSuccess", "Cart")" class="text-center mt-4">
+    <button type="submit" class="btn btn-success btn-lg">
+        ✔ Thanh toán ngay
+    </button>
+</form>
+

@@ -1,0 +1,53 @@
+﻿/*  edit.css  */
+
+.edit-wrapper {
+    max-width: 700px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+    .edit-wrapper h2 {
+        font-weight: 600;
+        color: #007bff;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+    .form-group label {
+        font-weight: 500;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: all 0.25s ease-in-out;
+}
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.15rem rgba(0, 123, 255, 0.25);
+    }
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn {
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-weight: 500;
+}

@@ -1,0 +1,55 @@
+﻿@model BobaTea.Models.Products
+
+@{
+    ViewBag.Title = "Chỉnh sửa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Content/css/edit.css" />
+}
+
+<div class="edit-wrapper">
+    <h2>✏️ Chỉnh sửa sản phẩm</h2>
+
+    @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.ProductId)
+
+        <div class="form-group">
+            <label>Tên sản phẩm</label>
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="form-group">
+            <label>Mô tả</label>
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 3 })
+        </div>
+
+        <div class="form-group">
+            <label>Giá (VNĐ)</label>
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "1000", required = "required" })
+        </div>
+
+        <div class="form-group">
+            <label>Ảnh hiện tại</label>
+            <div>
+                <img src="@Url.Content(Model.ImageUrl ?? "~/Content/images/no-image.png")"
+                     alt="@Model.Name"
+                     style="width:100px;height:100px;object-fit:cover;border-radius:8px;border:1px solid #ddd;" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Chọn ảnh mới (nếu muốn thay đổi)</label>
+            <input type="file" name="imageFile" class="form-control" accept="image/*" />
+            <small class="text-muted">Nếu không chọn, ảnh cũ sẽ được giữ nguyên</small>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-success">💾 Cập nhật</button>
+            @Html.ActionLink("← Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

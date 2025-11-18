@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null; /* Không dùng _Layout => không có header/footer */
+    Layout = null;
     ViewBag.Title = "Đăng nhập";
 }
 
@@ -7,19 +7,27 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
-    <title>@ViewBag.Title - Silver Wolf</title>
+    <title>@ViewBag.Title - BobaTea</title>
     <link rel="stylesheet" href="~/Content/css/Login.css" />
-
-    <!-- Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
     <div class="login-page">
         <div class="login-box">
             <h2>Đăng nhập</h2>
-            <form method="post" action="/Account/Login">
+
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <!-- Hiển thị thông báo lỗi -->
+                if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger text-center" style="color:red;">
+                        @Html.ValidationSummary()
+                    </div>
+                }
+
                 <div class="input-box">
                     <input type="text" name="Username" required />
                     <label>Tên đăng nhập</label>
@@ -44,7 +52,7 @@
                 <div class="register-link">
                     <p>Chưa có tài khoản? <a href="/Account/Register">Đăng ký ngay</a></p>
                 </div>
-            </form>
+            }
         </div>
     </div>
 </body>

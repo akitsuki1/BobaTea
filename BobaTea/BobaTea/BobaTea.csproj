@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -127,7 +130,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Models\Orderviewmodel.cs" />
+    <Compile Include="Areas\Admin\Models\Product.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplyController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -136,14 +147,62 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplyForm.cs" />
+    <Compile Include="Models\BobaTea.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BobaTea.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BobaTea.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BobaTea.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BobaTea.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobApplications.cs">
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderPro.cs">
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.cs">
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Products.cs">
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Users.cs">
+      <DependentUpon>BobaTea.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\admin-dashboard.css" />
+    <Content Include="Areas\Admin\Content\css\admin.css" />
+    <Content Include="Areas\Admin\Content\css\create.css" />
+    <Content Include="Areas\Admin\Content\css\detail.css" />
+    <Content Include="Areas\Admin\Content\css\Edit.css" />
+    <Content Include="Areas\Admin\Content\css\produce.css" />
+    <Content Include="Areas\Admin\Content\css\user.css" />
     <Content Include="Content\css\Apply.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -166,6 +225,8 @@
     <Content Include="Content\css\customer-care.css" />
     <Content Include="Content\css\footer.css" />
     <Content Include="Content\css\produce.css" />
+    <Content Include="Content\css\Profile.css" />
+    <Content Include="Content\css\search.css" />
     <Content Include="Content\images\8469233.jpg" />
     <Content Include="Content\images\apply_content.jpg" />
     <Content Include="Content\images\backgound.jpg" />
@@ -177,6 +238,7 @@
     <Content Include="Content\images\green.jpg" />
     <Content Include="Content\images\information_main_picture.jpg" />
     <Content Include="Content\images\logo.jpg" />
+    <Content Include="Content\images\no-img.png" />
     <Content Include="Content\images\pink.jpg" />
     <Content Include="Content\images\purple.jpg" />
     <Content Include="Content\images\search.png" />
@@ -187,26 +249,53 @@
     <Content Include="Content\css\Information.css" />
     <Content Include="Content\css\Login.css" />
     <Content Include="Content\css\MasterLayout.css" />
-    <Content Include="Content\pages\apply.html" />
-    <Content Include="Content\pages\cart.html" />
+    <Content Include="Content\js\search.js" />
     <Content Include="Content\pages\contact.html" />
     <Content Include="Content\pages\FavoriteAnswer.html" />
-    <Content Include="Content\pages\information.html" />
-    <Content Include="Content\pages\intro.html" />
-    <Content Include="Content\pages\login.html" />
-    <Content Include="Content\pages\masterlayout.html" />
     <Content Include="Content\pages\policy.html" />
-    <Content Include="Content\pages\produce.html" />
     <Content Include="Content\pages\shipping.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
+    <Content Include="Models\BobaTea.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BobaTea.edmx</DependentUpon>
+      <LastGenOutput>BobaTea.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BobaTea.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BobaTea.edmx</DependentUpon>
+      <LastGenOutput>BobaTea.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <EntityDeploy Include="Models\BobaTea.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BobaTea.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BobaTea.edmx.diagram">
+      <DependentUpon>BobaTea.edmx</DependentUpon>
+    </Content>
+    <Content Include="..\..\..\..\..\..\do an\Website.config" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -218,13 +307,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -237,11 +319,28 @@
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Home\search.cshtml" />
+    <Content Include="Views\Cart\checkout.cshtml" />
+    <Content Include="Views\Cart\invoice.cshtml" />
+    <Content Include="Views\Produce\Details.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Content\img\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Index\" />
+    <Folder Include="Content\images\products\" />
     <Folder Include="Views\About\" />
+    <Folder Include="Views\Admin\" />
     <Folder Include="Views\CartItem\" />
     <Folder Include="Views\Contact\" />
     <Folder Include="Views\LoginViewModel\" />
@@ -274,6 +373,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
