@@ -21,35 +21,40 @@ namespace BobaTea.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(Users model, string ConfirmPassword)
         {
-            if (!ModelState.IsValid)
+            if (string.IsNullOrEmpty(model.Username) || string.IsNullOrEmpty(model.PasswordHash))
             {
-                ModelState.AddModelError("", "❌ Dữ liệu nhập không hợp lệ.");
+                ViewBag.Error = "Vui lòng nhập đầy đủ thông tin!";
                 return View(model);
             }
 
-            // Kiểm tra tên đăng nhập tồn tại
-            if (db.Users.Any(u => u.Username == model.Username))
-            {
-                ModelState.AddModelError("", "⚠️ Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.");
-                return View(model);
-            }
-
-            // Kiểm tra mật khẩu nhập lại
             if (model.PasswordHash != ConfirmPassword)
             {
-                ModelState.AddModelError("", "⚠️ Mật khẩu xác nhận không khớp.");
+                ViewBag.Error = "Mật khẩu không trùng khớp!";
                 return View(model);
             }
 
-            // Gán role mặc định
-            model.Role = "User";
-            model.CreatedAt = DateTime.Now;
 
-            // Thêm vào DB
+            var checkUser = db.Users.FirstOrDefault(x => x.Username == model.Username);
+            if (checkUser != null)
+            {
+                ViewBag.Error = "Tên đăng nhập đã tồn tại!";
+                return View(model);
+            }
+
+
             db.Users.Add(model);
             db.SaveChanges();
 
-            TempData["Message"] = "🎉 Đăng ký thành công! Vui lòng đăng nhập.";
+            Customer cus = new Customer
+            {
+                IDCus = model.UserId,
+                NameCus = model.Username,
+                PhoneCus = model.Phone, 
+            };
+            db.Customer.Add(cus);
+            db.SaveChanges();
+
+            TempData["SuccessMessage"] = "Đăng ký thành công! Hãy đăng nhập.";
             return RedirectToAction("Login");
         }
 
@@ -63,13 +68,29 @@ namespace BobaTea.Controllers
         public ActionResult Login(string Username, string Password)
         {
             var user = db.Users.FirstOrDefault(u => u.Username == Username && u.PasswordHash == Password);
-
             if (user != null)
             {
-                // Lưu session
+                // Lưu session User
                 Session["User"] = user;
                 Session["Username"] = user.Username;
                 Session["UserId"] = user.UserId;
+
+                // Lấy hoặc tạo Customer tương ứng
+                var customer = db.Customer.FirstOrDefault(c => c.UserName == user.Username);
+                if (customer == null)
+                {
+                    customer = new Customer
+                    {
+                        NameCus = user.Username,
+                        UserName = user.Username,
+                        EmailCus = user.Email,
+                        PhoneCus = user.Phone
+                    };
+                    db.Customer.Add(customer);
+                    db.SaveChanges();
+                }
+
+                Session["CustomerId"] = customer.IDCus;
 
                 // Điều hướng theo quyền
                 if (user.Role == "Admin")
@@ -78,10 +99,9 @@ namespace BobaTea.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            ModelState.AddModelError("", "❌ Tên đăng nhập hoặc mật khẩu không đúng.");
+            ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
             return View();
         }
-
         // --- Đăng xuất ---
         public ActionResult Logout()
         {
@@ -95,14 +115,14 @@ namespace BobaTea.Controllers
         {
             if (Session["User"] == null)
             {
-                TempData["Message"] = "⚠️ Vui lòng đăng nhập để xem thông tin cá nhân.";
+                TempData["Message"] = "⚠ Vui lòng đăng nhập để xem thông tin cá nhân.";
                 return RedirectToAction("Login");
             }
 
             var sessionUser = Session["User"] as Users;
             if (sessionUser == null)
             {
-                TempData["Message"] = "❌ Phiên đăng nhập không hợp lệ.";
+                TempData["Message"] = " Phiên đăng nhập không hợp lệ.";
                 return RedirectToAction("Login");
             }
 
@@ -114,7 +134,7 @@ namespace BobaTea.Controllers
                 return RedirectToAction("Login");
             }
 
-            return View(user); // <- View này phải có tên là "Profile.cshtml"
+            return View(user); // <-tới Profile.cshtml
         }
 
         [HttpPost]
@@ -139,13 +159,21 @@ namespace BobaTea.Controllers
                 user.Address = model.Address;
                 db.SaveChanges();
 
-                TempData["Message"] = "✅ Cập nhật thành công!";
+                TempData["Message"] = " Cập nhật thành công!";
                 return RedirectToAction("Profile");
             }
 
-            ModelState.AddModelError("", "❌ Cập nhật thất bại.");
+            ModelState.AddModelError("", " Cập nhật thất bại.");
             return View(model);
         }
-
+        public bool CheckLogin()
+        {
+            if (Session["User"] == null)
+            {
+                TempData["LoginRequired"] = "⚠ Bạn cần đăng nhập để tiếp tục.";
+                return false;
+            }
+            return true;
+        }
     }
 }

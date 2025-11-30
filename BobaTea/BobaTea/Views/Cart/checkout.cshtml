@@ -2,46 +2,80 @@
 
 @{
     ViewBag.Title = "Hóa đơn thanh toán";
+    var cartEmpty = Model == null || !Model.Any();
+    var showSuccess = TempData["Success"] != null;
 }
+<link rel="stylesheet" href="~/Content/css/checkout.css"/>
+<div class="container mt-4">
 
-<h2 class="text-center mb-4">🧾 Hóa đơn thanh toán</h2>
+    @* Hiển thị thông báo thanh toán thành công nếu có *@
+    @if (showSuccess)
+    {
+        <div class="alert alert-success checkout-success-alert">
+            @TempData["Success"]
+        </div>
 
-<table class="table table-bordered text-center">
-    <thead class="table-dark">
-        <tr>
-            <th>Sản phẩm</th>
-            <th>Topping</th>
-            <th>Giá</th>
-            <th>Số lượng</th>
-            <th>Tổng</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.ProductName</td>
-                <td>@item.Topping</td>
-                <td>@item.Price.ToString("N0") đ</td>
-                <td>@item.Quantity</td>
-                <td>@((item.Price * item.Quantity).ToString("N0")) đ</td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <div class="checkout-success-btn">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-lg">
+                🛒 Tiếp tục mua sắm
+            </a>
+        </div>
+    }
+    @* Hiển thị giỏ hàng nếu còn sản phẩm và chưa thanh toán *@
+    else if (!cartEmpty)
+    {
+        <table class="table table-bordered text-center mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Topping</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Tổng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.Topping</td>
+                        <td>@item.Price.ToString("N0") đ</td>
+                        <td>@item.Quantity</td>
+                        <td>@((item.Price * item.Quantity).ToString("N0")) đ</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-<div class="text-end">
-    <h4>
-        Tổng cộng:
-        <span class="text-danger fw-bold">
-            @Model.Sum(x => x.Price * x.Quantity).ToString("N0") đ
-        </span>
-    </h4>
+        <div class="text-end mt-2">
+            <h4>
+                Tổng cộng:
+                <span class="text-danger fw-bold">
+                    @Model.Sum(x => x.Price * x.Quantity).ToString("N0") đ
+                </span>
+            </h4>
+        </div>
+
+        <div class="text-center mt-4">
+            <form method="post" action="@Url.Action("PaymentSuccess", "Cart")">
+                <button type="submit" class="btn btn-success btn-lg">
+                    ✔ Thanh toán ngay
+                </button>
+            </form>
+        </div>
+    }
+    @* Hiển thị giỏ hàng trống nếu không có sản phẩm và chưa thanh toán *@
+    else
+    {
+        <div class="alert alert-warning checkout-success-alert text-center">
+            Giỏ hàng của bạn đang trống.
+        </div>
+
+        <div class="checkout-success-btn text-center">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-lg">
+                🛒 Tiếp tục mua sắm
+            </a>
+        </div>
+    }
 </div>
-
-<form method="post" action="@Url.Action("PaymentSuccess", "Cart")" class="text-center mt-4">
-    <button type="submit" class="btn btn-success btn-lg">
-        ✔ Thanh toán ngay
-    </button>
-</form>
-

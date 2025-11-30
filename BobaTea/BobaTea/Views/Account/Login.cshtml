@@ -3,6 +3,13 @@
     ViewBag.Title = "Đăng nhập";
 }
 
+@if (TempData["LoginRequired"] != null)
+{
+    <div class="alert alert-warning">
+        @TempData["LoginRequired"]
+    </div>
+}
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>

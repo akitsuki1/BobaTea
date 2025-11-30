@@ -2,32 +2,36 @@
 
 @{
     var order = ViewBag.Order as BobaTea.Models.OrderPro;
+
 }
 
-<h3>Chi tiết đơn hàng #@order.ID</h3>
+<h3>Thông tin khách hàng</h3>
+<p>Tên: @ViewBag.Customer.NameCus</p>
+<p>Số điện thoại: @ViewBag.Customer.PhoneCus</p>
+<p>Email: @ViewBag.Customer.EmailCus</p>
 
-<p><strong>Khách hàng:</strong> @order.Customer?.Name</p>
-<p><strong>Ngày đặt:</strong> @order.DateOrder</p>
-<p><strong>Địa chỉ:</strong> @order.AddressDeliverry</p>
+<h3>Thông tin đơn hàng</h3>
+<p>Ngày đặt: @ViewBag.Order.DateOrder.ToString("dd/MM/yyyy")</p>
+<p>Địa chỉ giao: @ViewBag.Order.AddressDeliverry</p>
 
-<hr />
-<table class="table table-bordered">
+<h3>Chi tiết đơn hàng</h3>
+<table class="table">
     <thead>
         <tr>
             <th>Sản phẩm</th>
-            <th>Đơn giá</th>
             <th>Số lượng</th>
-            <th>Tổng</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var d in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@d.Product?.Name</td>
-                <td>@d.UnitPrice</td>
-                <td>@d.Quantity</td>
-                <td>@(d.UnitPrice * d.Quantity)</td>
+                <td>@item.IDProduct</td> 
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice</td>
+                <td>@(item.Quantity * item.UnitPrice)</td>
             </tr>
         }
     </tbody>

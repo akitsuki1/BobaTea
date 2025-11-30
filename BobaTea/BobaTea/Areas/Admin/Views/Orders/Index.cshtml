@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<BobaTea.Models.OrderPro>
-
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
 <h2>Danh sách đơn hàng</h2>
 
 <table class="table table-bordered">
@@ -12,19 +14,34 @@
             <th>Chi tiết</th>
         </tr>
     </thead>
+
     <tbody>
-        @foreach (var o in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@o.ID</td>
-                <td>@o.Customer?.Name</td>
-                <td>@o.DateOrder?.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>@o.AddressDeliverry</td>
+                <td>@item.ID</td>
+
                 <td>
-                    <a href="@Url.Action("Details", "Orders", new { id = o.ID, area = "Admin" })"
-                       class="btn btn-primary btn-sm">
-                        Xem
-                </a>
+                    @(item.Customer != null
+                        ? item.Customer.NameCus
+                        : "Không có dữ liệu")
+                </td>
+
+                <td>
+                    @item.DateOrder
+                </td>
+
+                <td>@item.AddressDeliverry</td>
+
+                <td>
+                    <a href="/Admin/Orders/Details/@item.ID"
+                       class="btn btn-primary">Xem</a>
+
+                    <a href="/Admin/Orders/Delete/@item.ID"
+                       class="btn btn-danger">
+
+                        Xóa
+                    </a>
                 </td>
             </tr>
         }

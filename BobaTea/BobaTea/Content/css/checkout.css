@@ -1,0 +1,29 @@
+﻿/* CSS cho thông báo thanh toán thành công và giỏ hàng trống */
+.checkout-success-alert {
+    margin-bottom: 24px; /* Khoảng cách dưới alert */
+    padding: 16px 20px; /* Padding vừa phải */
+    font-size: 19px; /* Kích thước chữ dễ đọc */
+    border-radius: 8px; /* Bo góc alert */
+    width: 100%;
+    max-width: 600px; /* Giới hạn chiều rộng */
+}
+
+/* CSS cho nút "Tiếp tục mua sắm" */
+.checkout-success-btn {
+    margin-top: 16px; /* Khoảng cách trên nút */
+    margin-bottom: 32px; /* Khoảng cách dưới nút */
+}
+
+    .checkout-success-btn a.btn {
+        padding: 12px 24px; /* Kích thước nút lớn hơn */
+        font-size: 18px;
+    }
+
+/* Căn giữa toàn bộ thông báo và nút */
+.checkout-success-alert,
+.checkout-success-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

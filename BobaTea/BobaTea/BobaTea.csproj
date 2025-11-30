@@ -189,7 +189,6 @@
       <DependentUpon>BobaTea.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RegisterViewModel.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Users.cs">
       <DependentUpon>BobaTea.tt</DependentUpon>
     </Compile>
@@ -221,6 +220,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\Cart.css" />
+    <Content Include="Content\css\checkout.css" />
     <Content Include="Content\css\contact.css" />
     <Content Include="Content\css\customer-care.css" />
     <Content Include="Content\css\footer.css" />
@@ -324,7 +324,6 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\search.cshtml" />
     <Content Include="Views\Cart\checkout.cshtml" />
-    <Content Include="Views\Cart\invoice.cshtml" />
     <Content Include="Views\Produce\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
